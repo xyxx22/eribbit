@@ -14,5 +14,11 @@ export default {
         token: ''
       }
     }
+  },
+  mutations: {
+    // 修改用过户数据
+    setUser (state, payload) {
+      state.profile = payload
+    }
   }
 }
