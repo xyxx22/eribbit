@@ -3,7 +3,7 @@
     <ul class="menu" >
       <li :class="{active:item.id===categoryId}"  v-for="item in menuList" :key="item.id" @mouseenter="categoryId = item.id">
         <RouterLink :to="`/category/${item.id}`">{{item.name}}</RouterLink>
-        <template v-if="item.children = false">
+        <template v-if="item.children">
           <RouterLink
             v-for="sub in item.children"
             :key="sub.id"
@@ -124,6 +124,7 @@ export default {
   top: 0;
   display: none;
   padding: 0 15px;
+  z-index: 0;
   h4 {
     font-size: 20px;
     font-weight: normal;
@@ -200,13 +201,13 @@ li.brand {
                 }
               }
             }
-
-  }
-  &:hover {
-    .layer {
+:hover {
+    .layer{
       display: block;
     }
   }
+
+}
 .xtx-skeleton {
   animation: fade 1s linear infinite alternate;
 }
