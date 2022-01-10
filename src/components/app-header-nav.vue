@@ -1,12 +1,12 @@
 <template>
   <ul class="app-header-nav">
         <li class="home"><RouterLink to="/">首页</RouterLink></li>
-        <li v-for="item in list" :key="item.id">
-          <router-link :to="`/category/${item.id}`">{{item.name}}</router-link>
-          <div class="layer">
+        <li v-for="item in list" :key="item.id" @mouseenter="show(item)" @mouseleave="hide(item)">
+          <router-link @click="hide(item)" :to="`/category/${item.id}`">{{item.name}}</router-link>
+          <div class="layer" :class="{open:item.open}">
             <ul>
               <li v-for="sub in item.children" :key="sub.id">
-                <router-link :to="`/category/sub/${sub.id}`">
+                <router-link @click="hide(item)" :to="`/category/sub/${sub.id}`">
                   <img :src="sub.picture" alt="">
                   <p>{{sub.name}}</p>
                 </router-link>
@@ -27,7 +27,16 @@ export default {
     const list = computed(() => {
       return store.state.category.list
     })
-    return { list }
+
+    const show = (item) => {
+      store.commit('category/show', item.id)
+    }
+
+    const hide = (item) => {
+      store.commit('category/hide', item.id)
+    }
+
+    return { list, show, hide }
   }
 }
 </script>
@@ -54,14 +63,18 @@ export default {
           color: @xtxColor;
           border-bottom: 1px solid @xtxColor;
         }
-        > .layer {
-        height: 132px;
-        opacity: 1;
-      }
+      //   > .layer {
+      //   height: 132px;
+      //   opacity: 1;
+      // }
       }
     }
   }
   .layer {
+    &.open {
+        height: 132px;
+        opacity: 1;
+      }
   width: 1240px;
   background-color: #fff;
   position: absolute;

@@ -1,6 +1,8 @@
 <template>
   <!-- 顶部通栏 -->
   <AppNavbar></AppNavbar>
+  <!-- 吸顶头部组件 -->
+  <AppHeaderSticky></AppHeaderSticky>
   <!-- 头部组件 -->
   <AppHeader></AppHeader>
   <!-- 内容容器 -->
@@ -15,6 +17,7 @@
 import AppNavbar from '@/components/app-navbar.vue'
 import AppHeader from '@/components/app-header.vue'
 import AppFooter from '@/components/app-footer.vue'
+import AppHeaderSticky from '@/components/app-header-sticky.vue'
 import { useStore } from 'vuex'
 
 export default {
@@ -22,7 +25,8 @@ export default {
   components: {
     AppNavbar,
     AppHeader,
-    AppFooter
+    AppFooter,
+    AppHeaderSticky
   },
   setup () {
     const store = useStore()
@@ -32,7 +36,7 @@ export default {
 </script>
 
 <style scoped lang='less'>
-.app-body{
-  min-height: 1200px;
-}
+// .app-body{
+//   // min-height: 1200px;
+// }
 </style>
